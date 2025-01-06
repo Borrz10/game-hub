@@ -1,23 +1,17 @@
-
 import { useQuery } from "@tanstack/react-query";
-import ms from 'ms';
+import ms from "ms";
 import genres from "../data/genres";
-import APIClient  from "../services/api-client";
+import APIClient from "../services/api-client";
+import { Genre } from "../entities/Genre";
 
-const apiclient = new APIClient<Genre>('/genres');
+const apiclient = new APIClient<Genre>("/genres");
 
-export interface Genre{
-    id:number;
-    name:string;
-    image_background:string;
-}
- 
-
-const useGenres = ()=>useQuery({
-    queryKey: ['genres'],
+const useGenres = () =>
+  useQuery({
+    queryKey: ["genres"],
     queryFn: apiclient.getAll,
-    staleTime: ms('24h'),
-    initialData:genres
-});
+    staleTime: ms("24h"),
+    initialData: genres,
+  });
 
-export default  useGenres;
+export default useGenres;
